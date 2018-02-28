@@ -109,7 +109,20 @@
   #define NULL  0
 
 // Bit number n (0<=n<32 or 0<=n<64)
+#if defined(_M_AMD64)
   #ifdef HAVE_FAST_LONGLONG
+    #define bit(n)  ((intptr_t)1LL<<(n))
+  #else
+    #define bit(n)  ((intptr_t)1L<<(n))
+  #endif
+// Bit number n (0<n<=32) mod 2^32
+  #ifdef HAVE_FAST_LONGLONG
+    #define bitm(n)  ((intptr_t)2LL<<((n)-1))
+  #else
+    #define bitm(n)  ((intptr_t)2L<<((n)-1))
+  #endif
+#else
+	#ifdef HAVE_FAST_LONGLONG
     #define bit(n)  (1LL<<(n))
   #else
     #define bit(n)  (1L<<(n))
@@ -120,6 +133,7 @@
   #else
     #define bitm(n)  (2L<<((n)-1))
   #endif
+#endif
 // Test bit n in x, n constant, x a cl_uint:
   #if !(defined(__sparc__) || defined(__sparc64__))
     #define bit_test(x,n)  ((x) & bit(n))
@@ -136,7 +150,20 @@
     #endif
   #endif
 // minus bit number n (0<=n<32 or 0<=n<64)
+#if defined(_M_AMD64)
   #ifdef HAVE_FAST_LONGLONG
+    #define minus_bit(n)  ((intptr_t)-1LL<<(n))
+  #else
+    #define minus_bit(n)  ((intptr_t)-1L<<(n))
+  #endif
+// minus bit number n (0<n<=32) mod 2^32
+  #ifdef HAVE_FAST_LONGLONG
+    #define minus_bitm(n)  ((intptr_t)-2LL<<((n)-1))
+  #else
+    #define minus_bitm(n)  ((intptr_t)-2L<<((n)-1))
+  #endif
+#else
+	#ifdef HAVE_FAST_LONGLONG
     #define minus_bit(n)  (-1LL<<(n))
   #else
     #define minus_bit(n)  (-1L<<(n))
@@ -147,14 +174,23 @@
   #else
     #define minus_bitm(n)  (-2L<<((n)-1))
   #endif
+#endif
 
 // Return 2^n, n a constant expression.
 // Same as bit(n), but undefined if n<0 or n>={long_}long_bitsize.
+#if defined(_M_AMD64)
   #if defined(HAVE_FAST_LONGLONG) || defined(intQsize)
+    #define bitc(n)  ((uintptr_t)1ULL << (((n) >= 0 && (n) < long_long_bitsize) ? (n) : 0))
+  #else
+    #define bitc(n)  ((uintptr_t)1UL << (((n) >= 0 && (n) < long_bitsize) ? (n) : 0))
+  #endif
+#else
+	#if defined(HAVE_FAST_LONGLONG) || defined(intQsize)
     #define bitc(n)  (1ULL << (((n) >= 0 && (n) < long_long_bitsize) ? (n) : 0))
   #else
     #define bitc(n)  (1UL << (((n) >= 0 && (n) < long_bitsize) ? (n) : 0))
   #endif
+#endif
 
 // floor(a,b) for a>=0, b>0 returns floor(a/b).
 // b should be a constant expression.
