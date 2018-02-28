@@ -11,7 +11,7 @@
 
 #include "cln/number.h"
 
-#if (cl_value_len < 32)
+#if (cl_value_len <= 32) || defined(_M_AMD64)
 
 #include "base/digitseq/cl_DS.h"
 
