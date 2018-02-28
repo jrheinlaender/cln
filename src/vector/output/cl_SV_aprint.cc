@@ -28,7 +28,7 @@ void fprint (std::ostream& stream, const cl_ring& R, const cl_SV_ringelt& vector
 				fprintchar(stream,',');
 			fprintchar(stream,' ');
 		}
-		R->_fprint(stream,vector[i]);
+		R->_fprint(stream,vector[(unsigned long)i]);
 	}
 	if (flags.vector_syntax == vsyntax_commonlisp)
 		fprintchar(stream,')');

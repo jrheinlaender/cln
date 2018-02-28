@@ -22,7 +22,7 @@ const cl_SV_any copy (const cl_SV_any& src)
 	hv->type = src.pointer_type();
 	new (&hv->v) cl_SV_inner<cl_gcobject> (len);
 	for (std::size_t i = 0; i < len; i++)
-		init1(cl_gcobject, hv->v[i]) (src[i]);
+		init1(cl_gcobject, hv->v[(unsigned long)i]) (src[(unsigned long)i]);
 	return hv;
 }
 

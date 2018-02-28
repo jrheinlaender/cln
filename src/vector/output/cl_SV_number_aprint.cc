@@ -31,7 +31,7 @@ void print_vector (std::ostream& stream, const cl_print_flags& flags, void (* pr
 				fprintchar(stream,',');
 			fprintchar(stream,' ');
 		}
-		printfun(stream,flags,vector[i]);
+		printfun(stream,flags,vector[(unsigned long)i]);
 	}
 	if (flags.vector_syntax == vsyntax_commonlisp)
 		fprintchar(stream,')');
