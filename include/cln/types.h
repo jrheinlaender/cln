@@ -3,6 +3,10 @@
 #ifndef _CL_TYPES_H
 #define _CL_TYPES_H
 
+#if defined(_M_AMD64)
+#include <stdint.h>
+#endif
+
 // CPU and other
 #include "cln/config.h"
 
@@ -25,7 +29,10 @@
     #error "No 16 bit integer type?"
   #endif
   // 32 bits
-  #if (long_bitsize==32)
+  #if defined(_M_AMD64) && (pointer_bitsize==32)
+   typedef intptr_t   sint32;
+   typedef uintptr_t  uint32;
+  #elif (long_bitsize==32)
     typedef long           sint32;
     typedef unsigned long  uint32;
   #elif (int_bitsize==32)
@@ -35,10 +42,15 @@
     #error "No 32 bit integer type?"
   #endif
   // 64 bits
-  #if (long_bitsize==64)
+  #if defined(_M_AMD64) && (pointer_bitsize==64)
+    typedef intptr_t   sint64;
+    typedef uintptr_t  uint64;
+    #undef HAVE_LONGLONG
+    #define HAVE_LONGLONG
+  #elif (long_bitsize==64)
     typedef long           sint64;
     typedef unsigned long  uint64;
-    #undef HAVE_LONGLONG
+		#undef HAVE_LONGLONG
     #define HAVE_LONGLONG
   #elif defined(HAVE_LONGLONG)
    #if defined(long_long_bitsize) && (long_long_bitsize==64)
@@ -99,15 +111,27 @@
   #endif
 
 // Integer type as large as a pointer.
-// Assumption: sizeof(long) == sizeof(void*)
-  #define intPsize long_bitsize
-  typedef long           sintP;
-  typedef unsigned long  uintP;
+#if defined(_M_AMD64)
+  #define intPsize pointer_bitsize
+  typedef intptr_t   sintP;
+  typedef uintptr_t  uintP;
+#else
+	// Assumption: sizeof(long) == sizeof(void*)
+	#define intPsize long_bitsize
+  typedef long   				sintP;
+  typedef unsigned long	uintP;
+#endif
 
 // Integer type used for the value of a fixnum.
-  #define intVsize long_bitsize
-  typedef long           sintV;
-  typedef unsigned long  uintV;
+#if defined(_M_AMD64)
+  #define intVsize pointer_bitsize
+  typedef intptr_t   sintV;
+  typedef uintptr_t  uintV;
+#else
+	#define intVsize long_bitsize
+  typedef long		 		  sintV;
+  typedef unsigned long	uintV;
+#endif
 
 // Numbers in the heap are stored as "digit" sequences.
 // A digit is an unsigned int with intDsize bits.
