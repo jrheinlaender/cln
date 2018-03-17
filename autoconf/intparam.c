@@ -11,6 +11,7 @@
 #define uint   os_uint
 #define ulong  os_ulong
 #include <stdio.h>
+#include <stdint.h>
 #undef ulong
 #undef uint
 #undef ushort
@@ -414,8 +415,8 @@ void main5(void) {
 
 void main6(void) {
 #define check_sizeof_pointer(type,typestr)  \
-  { if (!(sizeof(type) <= sizeof(long)))                                 \
-      printf("#error \"Type %s does not fit into a long!!\"\n",typestr); \
+  { if (!(sizeof(type) <= sizeof(intptr_t)))                                 \
+      printf("#error \"Type %s does not fit into a intptr_t!!\"\n",typestr); \
   }
   check_sizeof_pointer(char*,"char *");
   check_sizeof_pointer(long*,"long *");

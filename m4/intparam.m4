@@ -113,8 +113,8 @@ AC_DEFUN([CL_INTPARAM_CROSS],
         echo "#error \"Integer types long long and unsigned long long have different sizes!!\""
       fi
     fi
-    AC_TRY_COMPILE([], [typedef int verify[2*(sizeof(char*)<=sizeof (long))-1];],
-      [], [echo "#error \"Type char * does not fit into a long!!\""])
+    AC_TRY_COMPILE([#include <stdint.h>], [typedef int verify[2*(sizeof(char*)<=sizeof (intptr_t))-1];],
+      [], [echo "#error \"Type char * does not fit into a intptr_t!!\""])
     _AC_COMPUTE_INT([sizeof (char *)], [pointer_size])
     pointer_bitsize=`expr $pointer_size '*' $char_bitsize`
     echo "/* Pointers of type char * have $pointer_bitsize bits. */"
