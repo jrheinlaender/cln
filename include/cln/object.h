@@ -6,6 +6,9 @@
 #include "cln/types.h"
 #include "cln/modules.h"
 #include <cstdlib>
+#ifndef _M_AMD64
+#include <stdint.h>
+#endif
 
 namespace cln {
 
@@ -25,8 +28,15 @@ namespace cln {
 #if defined(__i386__) || (defined(__mips__) && !defined(__LP64__)) || (defined(__sparc__) && !defined(__arch64__)) || defined(__hppa__) || defined(__arm__) || defined(__rs6000__) || defined(__m88k__) || defined(__convex__) || (defined(__s390__) && !defined(__s390x__)) || defined(__sh__) || (defined(__x86_64__) && defined(__ILP32__))
   #define cl_word_alignment  4
 #endif
-#if defined(__alpha__) || defined(__ia64__) || defined(__mips64__) || defined(__powerpc64__) || (defined(__sparc__) && defined(__arch64__)) || (defined(__x86_64__) && !defined(__ILP32__)) || defined(__s390x__) || defined(__aarch64__)
+#if defined(__alpha__) || defined(__ia64__) || defined(__mips64__) || defined(__powerpc64__) || (defined(__sparc__) && defined(__arch64__)) || defined(__s390x__) || defined (__aarch64__)
   #define cl_word_alignment  8
+#endif
+#if defined(__x86_64__)
+  #if defined(_WIN64)
+    #define cl_word_alignment  4
+  #elif !defined(__ILP32__)
+    #define cl_word_alignment  8
+  #endif
 #endif
 #if !defined(cl_word_alignment)
   #error "Define cl_word_alignment for your CPU!"
@@ -94,8 +104,8 @@ inline bool cl_immediate_p (cl_uint word)
 #define cl_tag_shift	0
 #define cl_value_shift  (cl_tag_len+cl_tag_shift)
 #define cl_value_len	(cl_pointer_size - cl_value_shift)
-#define cl_tag_mask	(((1UL << cl_tag_len) - 1) << cl_tag_shift)
-#define cl_value_mask	(((1UL << cl_value_len) - 1) << cl_value_shift)
+#define cl_tag_mask	((((uintptr_t)1UL << cl_tag_len) - 1) << cl_tag_shift)
+#define cl_value_mask	((((uintptr_t)1UL << cl_value_len) - 1) << cl_value_shift)
 
 // Return the tag of a word.
 inline cl_uint cl_tag (cl_uint word)
@@ -125,11 +135,19 @@ inline cl_uint cl_combine (cl_uint tag, unsigned int value)
 { return cl_combine(tag, (cl_uint)value); }
 inline cl_uint cl_combine (cl_uint tag, int value)
 { return cl_combine(tag, (cl_sint)value); }
+#if defined(_M_AMD64)
+inline cl_uint cl_combine (cl_uint tag, unsigned long value)
+{ return cl_combine(tag, (cl_uint)value); }
+inline cl_uint cl_combine (cl_uint tag, long value)
+{ return cl_combine(tag, (cl_sint)value); }
+#endif
 #ifdef HAVE_LONGLONG
+#if !defined(_M_AMD64)
 inline cl_uint cl_combine (cl_uint tag, unsigned long long value)
 { return cl_combine(tag, (cl_uint)value); }
 inline cl_uint cl_combine (cl_uint tag, long long value)
 { return cl_combine(tag, (cl_uint)value); }
+#endif
 #endif
 
 // Definition of the tags.
