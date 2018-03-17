@@ -41,7 +41,7 @@ inline bool equal (const cl_symbol& s1, const cl_symbol& s2)
 }
 
 // Hash code.
-extern unsigned long hashcode (const cl_symbol& s);
+extern uintptr_t hashcode (const cl_symbol& s);
 
 }  // namespace cln
 
