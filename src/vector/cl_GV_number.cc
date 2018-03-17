@@ -47,7 +47,7 @@ struct cl_heap_GV_number_general : public cl_heap_GV_number {
 	// Standard allocation disabled.
 	void* operator new (size_t size) { unused size; throw runtime_exception(); }
 	// Standard deallocation disabled.
-	void operator delete (void* ptr) { unused ptr; throw runtime_exception(); }
+	void operator delete (void* ptr) throw(runtime_exception) { unused ptr; throw runtime_exception(); }
 	// No default constructor.
 	cl_heap_GV_number_general ();
 };

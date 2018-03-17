@@ -283,7 +283,8 @@
 public:									\
     void* operator new (size_t size) { return malloc_hook(size); }	\
     void* operator new (size_t size, classname* ptr) { unused size; return ptr; } \
-    void operator delete (void* ptr) { free_hook(ptr); }
+    void operator delete (void* ptr) { free_hook(ptr); } \
+    void operator delete (void* ptr, classname* _ptr) { unused ptr; unused _ptr; }
 
 // init1(type, object) (value);
 // initializes `object' with `value', by calling `type''s constructor.

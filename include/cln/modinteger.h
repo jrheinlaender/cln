@@ -114,6 +114,7 @@ public:	// Ability to place an object at a given address.
 	void* operator new (size_t size) { return malloc_hook(size); }
 	void* operator new (size_t size, void* ptr) { (void)size; return ptr; }
 	void operator delete (void* ptr) { free_hook(ptr); }
+	void operator delete (void* ptr, void* _ptr) { (void)ptr; (void)_ptr; }
 };
 
 class cl_MI /* cf. cl_ring_element */ : public _cl_MI {
@@ -136,6 +137,7 @@ public:	// Ability to place an object at a given address.
 	void* operator new (size_t size) { return malloc_hook(size); }
 	void* operator new (size_t size, void* ptr) { (void)size; return ptr; }
 	void operator delete (void* ptr) { free_hook(ptr); }
+	void operator delete (void* ptr, void* _ptr) { (void)ptr; (void)_ptr; }
 };
 
 

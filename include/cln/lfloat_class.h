@@ -30,6 +30,7 @@ public:	// Ability to place an object at a given address.
 	void* operator new (size_t size) { return malloc_hook(size); }
 	void* operator new (size_t size, void* ptr) { (void)size; return ptr; }
 	void operator delete (void* ptr) { free_hook(ptr); }
+	void operator delete (void* ptr, void* _ptr) { (void)ptr; (void)_ptr; }
 };
 // Define this if you want the elementary cl_LF operations (+, -, *, /,
 // sqrt, cl_LF_I_mul) to return results which are always the correctly
