@@ -712,7 +712,7 @@ inline sintD FN_MSD (cl_uint word)
 
 
 // Hash code.
-  extern unsigned long hashcode (const cl_I& x);
+  extern uintptr_t hashcode (const cl_I& x);
 
 
 // A fixnum (cl_FN) is an immediate integer.
