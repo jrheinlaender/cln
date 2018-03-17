@@ -14,7 +14,7 @@ namespace cln {
 // We don't use `stream << x' or `stream << dec << x', because an ostream
 // carries so many attributes, and we don't want to modifies these attributes.
 
-void fprintdecimal (std::ostream& stream, unsigned long x)
+void fprintdecimal (std::ostream& stream, uintptr_t x)
 {
 	#define bufsize 20
 	var char buf[bufsize+1];
@@ -30,13 +30,13 @@ void fprintdecimal (std::ostream& stream, unsigned long x)
 	#undef bufsize
 }
 
-void fprintdecimal (std::ostream& stream, long x)
+void fprintdecimal (std::ostream& stream, intptr_t x)
 {
 	if (x >= 0)
-		fprintdecimal(stream,(unsigned long)x);
+		fprintdecimal(stream,(uintptr_t)x);
 	else {
 		fprintchar(stream,'-');
-		fprintdecimal(stream,(unsigned long)(-1-x)+1);
+		fprintdecimal(stream,(uintptr_t)(-1-x)+1);
 	}
 }
 

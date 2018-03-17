@@ -5,6 +5,9 @@
 
 #include "cln/types.h"
 #include "cln/modules.h"
+#ifndef _M_AMD64
+#include <stdint.h>
+#endif
 
 // I/O through <iostream>
 
@@ -37,30 +40,55 @@ inline void fprint (std::ostream& stream, const char * string)
 }
 
 
-extern void fprintdecimal (std::ostream& stream, unsigned long x);
-extern void fprintdecimal (std::ostream& stream, long x);
+extern void fprintdecimal (std::ostream& stream, uintptr_t x);
+extern void fprintdecimal (std::ostream& stream, intptr_t x);
 
+#if (pointer_bitsize != long_bitsize)
+inline void fprintdecimal (std::ostream& stream, unsigned long x)
+{
+	fprintdecimal(stream,(uintptr_t)x);
+}
+inline void fprintdecimal (std::ostream& stream, long x)
+{
+	fprintdecimal(stream,(intptr_t)x);
+}
+#endif
+
+#if (pointer_bitsize != int_bitsize)
 inline void fprintdecimal (std::ostream& stream, unsigned int x)
 {
-	fprintdecimal(stream,(unsigned long)x);
+	fprintdecimal(stream,(uintptr_t)x);
 }
 inline void fprintdecimal (std::ostream& stream, int x)
 {
 	fprintdecimal(stream,(long)x);
 }
+#endif
 
-extern void fprinthexadecimal (std::ostream& stream, unsigned long x);
-extern void fprinthexadecimal (std::ostream& stream, long x);
+extern void fprinthexadecimal (std::ostream& stream, uintptr_t x);
+extern void fprinthexadecimal (std::ostream& stream, intptr_t x);
 
+#if (pointer_bitsize != long_bitsize)
+inline void fprinthexadecimal (std::ostream& stream, unsigned long x)
+{
+	fprinthexadecimal(stream,(uintptr_t)x);
+}
+inline void fprinthexadecimal (std::ostream& stream, long x)
+{
+	fprinthexadecimal(stream,(intptr_t)x);
+}
+#endif
+
+#if (pointer_bitsize != int_bitsize)
 inline void fprinthexadecimal (std::ostream& stream, unsigned int x)
 {
-	fprinthexadecimal(stream,(unsigned long)x);
+	fprinthexadecimal(stream,(uintptr_t)x);
 }
 inline void fprinthexadecimal (std::ostream& stream, int x)
 {
-	fprinthexadecimal(stream,(long)x);
+	fprinthexadecimal(stream,(intptr_t)x);
 }
-
+#endif
 
 struct cl_print_flags;
 struct cl_print_number_flags;
