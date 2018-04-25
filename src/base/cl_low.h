@@ -1461,7 +1461,7 @@ inline uint32 mulu32_unchecked (uint32 arg1, uint32 arg2)
     { var uintC _bitsize = 1;						\
       var uint64 _x64 = (uint64)(digit);				\
       /* _x64 hat höchstens 64 Bits.                                   */\
-      if (_x64 >= bit(32)) { _x64 = _x64>>32; _bitsize += 32; }		\
+      if (_x64 >= (1ULL << 32)) { _x64 = _x64>>32; _bitsize += 32; }		\
       /* _x64 hat höchstens 32 Bits.                                   */\
       if (_x64 >= bit(16)) { _x64 = _x64>>16; _bitsize += 16; }		\
       /* _x64 hat höchstens 16 Bits.                                   */\

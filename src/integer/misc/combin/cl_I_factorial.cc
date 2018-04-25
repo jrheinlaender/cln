@@ -30,6 +30,70 @@ namespace cln {
 
 const cl_I factorial (uintL n) // assume n >= 0 small
 {
+#ifdef _M_AMD64
+	static uintV const fakul_table [] = {
+        1,
+        (uintV)1,
+        (uintV)1*2,
+        #if (cl_value_len>=4)
+        (uintV)1*2*3,
+        #if (cl_value_len>=6)
+        (uintV)1*2*3*4,
+        #if (cl_value_len>=8)
+        (uintV)1*2*3*4*5,
+        #if (cl_value_len>=11)
+        (uintV)1*2*3*4*5*6,
+        #if (cl_value_len>=14)
+        (uintV)1*2*3*4*5*6*7,
+        #if (cl_value_len>=17)
+        (uintV)1*2*3*4*5*6*7*8,
+        #if (cl_value_len>=20)
+        (uintV)1*2*3*4*5*6*7*8*9,
+        #if (cl_value_len>=23)
+        (uintV)1*2*3*4*5*6*7*8*9*10,
+        #if (cl_value_len>=27)
+        (uintV)1*2*3*4*5*6*7*8*9*10*11,
+        #if (cl_value_len>=30)
+        (uintV)1*2*3*4*5*6*7*8*9*10*11*12,
+        #if (cl_value_len>=34)
+        (uintV)1*2*3*4*5*6*7*8*9*10*11*12*13,
+        #if (cl_value_len>=38)
+        (uintV)1*2*3*4*5*6*7*8*9*10*11*12*13*14,
+        #if (cl_value_len>=42)
+        (uintV)1*2*3*4*5*6*7*8*9*10*11*12*13*14*15,
+        #if (cl_value_len>=46)
+        (uintV)1*2*3*4*5*6*7*8*9*10*11*12*13*14*15*16,
+        #if (cl_value_len>=50)
+        (uintV)1*2*3*4*5*6*7*8*9*10*11*12*13*14*15*16*17,
+        #if (cl_value_len>=54)
+        (uintV)1*2*3*4*5*6*7*8*9*10*11*12*13*14*15*16*17*18,
+        #if (cl_value_len>=58)
+        (uintV)1*2*3*4*5*6*7*8*9*10*11*12*13*14*15*16*17*18*19,
+        #if (cl_value_len>=63)
+        (uintV)1*2*3*4*5*6*7*8*9*10*11*12*13*14*15*16*17*18*19*20,
+        #if (cl_value_len>=67)
+        ...
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+	};
+#else
 	static uintV const fakul_table [] = {
         1,
         1UL,
@@ -92,6 +156,7 @@ const cl_I factorial (uintL n) // assume n >= 0 small
         #endif
         #endif
 	};
+#endif
 
       if (n < sizeof(fakul_table)/sizeof(cl_I))
         { return UV_to_I(fakul_table[n]); }

@@ -28,6 +28,105 @@ namespace cln {
 
 const cl_I doublefactorial (uintL n) // assume n >= 0 small
 {
+#ifdef _M_AMD64
+		static cl_I const doublefakul_table [] = {
+        1,
+        1ULL,
+        1ULL*2,
+        1ULL*3,
+        #if (cl_value_len>=5)
+        1ULL*2*4,
+        1ULL*3*5,
+        #if (cl_value_len>=7)
+        1ULL*2*4*6,
+        #if (cl_value_len>=8)
+        1ULL*3*5*7,
+        #if (cl_value_len>=10)
+        1ULL*2*4*6*8,
+        #if (cl_value_len>=11)
+        1ULL*3*5*7*9,
+        #if (cl_value_len>=13)
+        1ULL*2*4*6*8*10,
+        #if (cl_value_len>=15)
+        1ULL*3*5*7*9*11,
+        #if (cl_value_len>=17)
+        1ULL*2*4*6*8*10*12,
+        #if (cl_value_len>=19)
+        1ULL*3*5*7*9*11*13,
+        #if (cl_value_len>=21)
+        1ULL*2*4*6*8*10*12*14,
+        #if (cl_value_len>=22)
+        1ULL*3*5*7*9*11*13*15,
+        #if (cl_value_len>=25)
+        1ULL*2*4*6*8*10*12*14*16,
+        #if (cl_value_len>=27)
+        1ULL*3*5*7*9*11*13*15*17,
+        #if (cl_value_len>=29)
+        1ULL*2*4*6*8*10*12*14*16*18,
+        #if (cl_value_len>=31)
+        1ULL*3*5*7*9*11*13*15*17*19,
+        #if (cl_value_len>=33)
+        1ULL*2*4*6*8*10*12*14*16*18*20,
+        #if (cl_value_len>=35)
+        1ULL*3*5*7*9*11*13*15*17*19*21,
+        #if (cl_value_len>=38)
+        1ULL*2*4*6*8*10*12*14*16*18*20*22,
+        #if (cl_value_len>=40)
+        1ULL*3*5*7*9*11*13*15*17*19*21*23,
+        #if (cl_value_len>=42)
+        1ULL*2*4*6*8*10*12*14*16*18*20*22*24,
+        #if (cl_value_len>=44)
+        1ULL*3*5*7*9*11*13*15*17*19*21*23*25,
+        #if (cl_value_len>=47)
+        1ULL*2*4*6*8*10*12*14*16*18*20*22*24*26,
+        #if (cl_value_len>=49)
+        1ULL*3*5*7*9*11*13*15*17*19*21*23*25*27,
+        #if (cl_value_len>=52)
+        1ULL*2*4*6*8*10*12*14*16*18*20*22*24*26*28,
+        #if (cl_value_len>=54)
+        1ULL*3*5*7*9*11*13*15*17*19*21*23*25*27*29,
+        #if (cl_value_len>=57)
+        1ULL*2*4*6*8*10*12*14*16*18*20*22*24*26*28*30,
+        #if (cl_value_len>=59)
+        1ULL*3*5*7*9*11*13*15*17*19*21*23*25*27*29*31,
+        #if (cl_value_len>=62)
+        1ULL*2*4*6*8*10*12*14*16*18*20*22*24*26*28*30*32,
+        #if (cl_value_len>=64)
+        1ULL*3*5*7*9*11*13*15*17*19*21*23*25*27*29*31*33,
+        #if (cl_value_len>=67)
+        ...
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+        #endif
+	};
+#else
 	static cl_I const doublefakul_table [] = {
         1,
         1UL,
@@ -125,6 +224,7 @@ const cl_I doublefactorial (uintL n) // assume n >= 0 small
         #endif
         #endif
 	};
+#endif
 
       if (n < sizeof(doublefakul_table)/sizeof(cl_I))
         { return doublefakul_table[n]; }
