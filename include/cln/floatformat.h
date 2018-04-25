@@ -8,7 +8,11 @@
 namespace cln {
 
 // Float format specifier type. (Float mantissa precision in bits.)
+#if defined(_MSC_VER)
+enum float_format_t : uintE {
+#else
 enum float_format_t {
+#endif
 	float_format_sfloat = 17,
 	float_format_ffloat = 24,
 	float_format_dfloat = 53,
