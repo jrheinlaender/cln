@@ -32,7 +32,7 @@ public:
 private:
 	virtual void dummy ();
 // Friend declarations. They are for the compiler. Just ignore them.
-	friend class cl_property_list;
+	friend struct cl_property_list;
 };
 #define SUBCLASS_cl_property() \
 	void* operator new (size_t size) { return malloc_hook(size); } \

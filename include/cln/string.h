@@ -25,7 +25,7 @@ private:
 	cl_heap_string ();
 private:
 // Friend declarations. They are for the compiler. Just ignore them.
-	friend class cl_string;
+	friend struct cl_string;
 	friend cl_heap_string* cl_make_heap_string (unsigned long len);
 	friend cl_heap_string* cl_make_heap_string (const char * s);
 	friend cl_heap_string* cl_make_heap_string (const char * ptr, unsigned long len);
