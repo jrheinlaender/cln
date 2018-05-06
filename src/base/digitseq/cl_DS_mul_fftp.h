@@ -48,7 +48,7 @@ typedef struct { uintD _w[3]; } fftp_word;
 
 #if 0
 // p = 19807040628566084398385987585 = 5 * 3761 * 7484047069 * 140737471578113
-static const fftp_word p = W3( 1L<<30, 0, 1 ); // p = 2^94 + 1
+static const fftp_word p = W3(1<<30, 0, 1 ); // p = 2^94 + 1
 #define FFT_P_94
 static const fftp_word fftp_roots_of_1 [24+1] =
   // roots_of_1[n] is a (2^n)th root of unity in Z/pZ.
@@ -88,7 +88,7 @@ static const fftp_word fftp_roots_of_1 [24+1] =
 // that  w^(2^(n-1)) = -1...
 #else
 // p = 34662321099990647697175478273, a prime
-static const fftp_word p = W3( 7L<<28, 0, 1 ); // p = 7 * 2^92 + 1
+static const fftp_word p = W3(7<<28, 0, 1 ); // p = 7 * 2^92 + 1
 #define FFT_P_92
 static const fftp_word fftp_roots_of_1 [92+1] =
   // roots_of_1[n] is a (2^n)th root of unity in Z/pZ.
