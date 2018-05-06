@@ -5,6 +5,7 @@
 
 #include "base/cl_macros.h"
 #include <cstdlib>
+#include <stdint.h>
 
 namespace cln {
 
@@ -42,7 +43,7 @@ namespace cln {
 
 struct cl_alloca_header {
 	cl_alloca_header* next;
-	long usable_memory[1]; // "long" guarantees alignment
+	intptr_t usable_memory[1]; // "intptr_t" guarantees alignment
 };
 
 extern cl_alloca_header* cl_alloc_alloca_header (size_t size);
