@@ -1,4 +1,5 @@
 // offsetof() and friends
+#include <stdint.h>
 
 // <stddef.h> in GCC 3.0/3.1 has the obscure property of redefining
 // offsetof every time it is included, not just the first time.
@@ -7,9 +8,9 @@
 
 #undef offsetof
 #if defined(__GNUG__)
-  #define offsetof(type,ident)  ((long)&(((type*)1)->ident)-1)
+  #define offsetof(type,ident)  ((intptr_t)&(((type*)1)->ident)-1)
 #else
-  #define offsetof(type,ident)  ((long)&(((type*)0)->ident))
+  #define offsetof(type,ident)  ((intptr_t)&(((type*)0)->ident))
 #endif
 
 #ifndef _CL_OFFSETOF_H
