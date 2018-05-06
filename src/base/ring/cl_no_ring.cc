@@ -23,9 +23,9 @@ uninitialized_error_msg (const _cl_ring_element& obj)
 {
 	std::ostringstream buf;
 	fprint(buf, "Uninitialized ring element @0x");
-	fprinthexadecimal(buf, (unsigned long)(void*)&obj);
+	fprinthexadecimal(buf, (uintptr_t)(void*)&obj);
 	fprint(buf, ": 0x");
-        fprinthexadecimal(buf, (unsigned long)obj.rep.word);
+        fprinthexadecimal(buf, (uintptr_t)obj.rep.word);
 	return buf.str();
 }
 
@@ -34,13 +34,13 @@ uninitialized_error_msg (const _cl_ring_element& obj_x, const _cl_ring_element& 
 {
 	std::ostringstream buf;
 	fprint(buf, "Uninitialized ring elements @0x");
-	fprinthexadecimal(buf, (unsigned long)(void*)&obj_x);
+	fprinthexadecimal(buf, (uintptr_t)(void*)&obj_x);
 	fprint(buf, ": 0x");
-        fprinthexadecimal(buf, (unsigned long)obj_x.rep.word);
+        fprinthexadecimal(buf, (uintptr_t)obj_x.rep.word);
 	fprint(buf, ", @0x");
-	fprinthexadecimal(buf, (unsigned long)(void*)&obj_y);
+	fprinthexadecimal(buf, (uintptr_t)(void*)&obj_y);
 	fprint(buf, ": 0x");
-        fprinthexadecimal(buf, (unsigned long)obj_y.rep.word);
+        fprinthexadecimal(buf, (uintptr_t)obj_y.rep.word);
 	return buf.str();
 }
 
