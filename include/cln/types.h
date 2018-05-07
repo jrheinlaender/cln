@@ -3,6 +3,8 @@
 #ifndef _CL_TYPES_H
 #define _CL_TYPES_H
 
+#include <stdint.h>
+
 // CPU and other
 #include "cln/config.h"
 
@@ -99,15 +101,14 @@
   #endif
 
 // Integer type as large as a pointer.
-// Assumption: sizeof(long) == sizeof(void*)
-  #define intPsize long_bitsize
-  typedef long           sintP;
-  typedef unsigned long  uintP;
+  #define intPsize pointer_bitsize
+  typedef intptr_t   sintP;
+  typedef uintptr_t  uintP;
 
 // Integer type used for the value of a fixnum.
-  #define intVsize long_bitsize
-  typedef long           sintV;
-  typedef unsigned long  uintV;
+  #define intVsize pointer_bitsize
+  typedef intptr_t   sintV;
+  typedef uintptr_t  uintV;
 
 // Numbers in the heap are stored as "digit" sequences.
 // A digit is an unsigned int with intDsize bits.
