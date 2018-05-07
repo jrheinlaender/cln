@@ -11,7 +11,7 @@
 
 #include "cln/number.h"
 
-#if (cl_value_len <= 32)
+#if (cl_value_len <= 32)  || (long_bitsize == 32)
 
 #include "base/digitseq/cl_DS.h"
 
