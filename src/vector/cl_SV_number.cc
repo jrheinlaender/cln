@@ -43,7 +43,7 @@ cl_heap_SV_number* cl_make_heap_SV_number (std::size_t len)
 	hv->type = &cl_class_svector_number();
 	new (&hv->v) cl_SV_inner<cl_number> (len);
 	for (std::size_t i = 0; i < len; i++)
-		init1(cl_number, hv->v[i]) (0);
+		init1(cl_number, hv->v[(unsigned long)i]) (0);
 	return hv;
 }
 

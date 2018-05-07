@@ -32,7 +32,7 @@ void print_vector (std::ostream& stream, const cl_print_flags& flags, void (* pr
 			fprintchar(stream,' ');
 		}
 		// The conversion to cl_number below is needed for SGI CC.
-		printfun(stream,flags,(cl_number)vector[i]);
+		printfun(stream,flags,(cl_number)vector[(unsigned long)i]);
 	}
 	if (flags.vector_syntax == vsyntax_commonlisp)
 		fprintchar(stream,')');

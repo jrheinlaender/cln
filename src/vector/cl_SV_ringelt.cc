@@ -44,7 +44,7 @@ cl_heap_SV_ringelt* cl_make_heap_SV_ringelt (std::size_t len)
 	hv->type = &cl_class_svector_ringelt();
 	new (&hv->v) cl_SV_inner<_cl_ring_element> (len);
 	for (std::size_t i = 0; i < len; i++)
-		init1(_cl_ring_element, hv->v[i]) ();
+		init1(_cl_ring_element, hv->v[(unsigned long)i]) ();
 	return hv;
 }
 
