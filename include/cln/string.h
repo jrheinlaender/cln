@@ -20,7 +20,7 @@ private:
 	// Standard allocation disabled.
 	void* operator new (size_t size) { (void)size; throw runtime_exception(); }
 	// Standard deallocation disabled.
-	void operator delete (void* ptr) { (void)ptr; throw runtime_exception(); }
+	void operator delete (void* ptr) throw(runtime_exception()) { (void)ptr; throw runtime_exception(); }
 	// No default constructor.
 	cl_heap_string ();
 private:
