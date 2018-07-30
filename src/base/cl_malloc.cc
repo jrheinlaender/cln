@@ -22,6 +22,14 @@
 
 namespace cln {
 
+#ifdef _MSC_VER
+void* malloc_hook (size_t size) {
+	void* ptr = malloc(size);
+	if (ptr)
+		return ptr;
+	throw runtime_exception("Out of virtual memory.");
+}
+#else
 // Just like malloc() but never return NULL pointers.
 static void* xmalloc (size_t size)
 {
@@ -33,5 +41,6 @@ static void* xmalloc (size_t size)
 
 void* (*malloc_hook) (size_t size) = xmalloc;
 void (*free_hook) (void* ptr)      = free;
+#endif
 
 }  // namespace cln
