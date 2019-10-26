@@ -182,3 +182,7 @@ main_SOURCES = main.cc
 main_LDADD = ../src/libcln.la
 
 
+# Remove .deps directories created by 'configure'.
+# I would say that this left-over is an Automake 1.16.1 bug.
+distclean-local:
+	rm -rf $(DEPDIR)

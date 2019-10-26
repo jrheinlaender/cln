@@ -986,3 +986,8 @@ DISTCLEANFILES = \
 base/digitseq/cl_asm.S \
 polynomial/elem/cl_asm_GF2.S
 
+# Remove .deps directories created by 'configure'.
+# I would say that this left-over is an Automake 1.16.1 bug.
+distclean-local:
+	rm -rf $(DEPDIR) */$(DEPDIR) */*/$(DEPDIR) */*/*/$(DEPDIR)
+
