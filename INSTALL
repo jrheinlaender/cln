@@ -76,7 +76,7 @@ be misgenerated,
 
 3. Run
 
-$ autoreconf -iv
+$ ./autogen.sh
 
 to generate the `configure' script, and proceed in a standard way, i.e.
 

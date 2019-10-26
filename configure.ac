@@ -23,7 +23,7 @@ m4_define([cl_lt_version], [cl_lt_current:cl_lt_revision:cl_lt_age])
 AC_INIT([cln], cl_version)
 AC_PREREQ(2.59)
 AC_CONFIG_SRCDIR(src/integer/gcd/cl_I_gcd.cc)
-AC_CONFIG_AUX_DIR([autoconf])
+AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS(autoconf/cl_config.h include/cln/config.h include/cln/host_cpu.h include/cln/version.h src/base/cl_base_config.h src/base/cl_gmpconfig.h src/timing/cl_t_config.h)
 AM_INIT_AUTOMAKE([foreign 1.10 dist-bzip2 subdir-objects])
@@ -55,7 +55,7 @@ AC_PROG_INSTALL
 dnl
 dnl           check for host type
 dnl
-CL_CANONICAL_HOST(autoconf)
+CL_CANONICAL_HOST
                       dnl sets variables host, host_cpu, host_vendor, host_os
 CL_CANONICAL_HOST_CPU
                       dnl DEFS __${host_cpu}__
