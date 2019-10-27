@@ -25,10 +25,5 @@ int test_I_io (int iterations)
 		}
 
 	}
-#if defined(_WIN32) && !defined(__CYGWIN__)
-	std::cerr << "[The test is known to fail on this platform, ignore it]" << std::endl;
-	return 0;
-#else
 	return error;
-#endif
 }
