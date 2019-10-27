@@ -113,7 +113,7 @@ AC_DEFUN([CL_INTPARAM_CROSS],
         echo "#error \"Integer types long long and unsigned long long have different sizes!!\""
       fi
     fi
-    AC_TRY_COMPILE([], [typedef int verify[2*(sizeof(char*)<=sizeof (long))-1];],
+    AC_TRY_COMPILE([], [static_assert(sizeof(char*) <= sizeof(long), "");],
       [], [echo "#error \"Type char * does not fit into a long!!\""])
     _AC_COMPUTE_INT([sizeof (char *)], [pointer_size])
     pointer_bitsize=`expr $pointer_size '*' $char_bitsize`
@@ -258,7 +258,7 @@ AC_DEFUN([CL_INTPARAM_BITSIZE],
 [
   n=1; x="($1)2"
   while true; do
-    AC_TRY_COMPILE([], [typedef int verify[2*(($1)($x) == 0) - 1];],
+    AC_TRY_COMPILE([], [static_assert(($1)($x) == 0, "");],
       [$2=$n; break;],
       [if test $n = 1000; then $2=; break; fi;])
     n=`expr $n + 1`; x="$x * ($1)2"
@@ -290,7 +290,7 @@ AC_DEFUN([CL_INTPARAM_ALIGNOF],
 #else
 # define alignof(type)  offsetof (struct { char slot1; type slot2; }, slot2)
 #endif
-], [typedef int verify[2*(alignof($1) == $n) - 1];],
+], [static_assert(alignof($1) == $n, "");],
       [$2=$n; break;]
       [if test $n = 0; then $2=; break; fi])
     n=`expr $n '*' 2`

@@ -22,20 +22,16 @@ AC_DEFUN([CL_FLOATPARAM_CROSS],
         epsilon_bits=-1; y="($type)1.0"
         while true; do
           AC_TRY_COMPILE([],
-            [typedef int verify[2*(
-               (($type)(($type)1.0 + ($type)($y)) == ($type)1.0)
-               || ($type)(($type)(($type)1.0 + ($type)($y)) - ($type)1.0) != ($type)($y)
-             ) - 1];],
+            [static_assert((($type)(($type)1.0 + ($type)($y)) == ($type)1.0)
+                         || ($type)(($type)(($type)1.0 + ($type)($y)) - ($type)1.0) != ($type)($y), "");],
             [break;])
           epsilon_bits=`expr $epsilon_bits + 1`; y="$y * ($type)0.5"
         done
         negepsilon_bits=-1; y="($type)-1.0"
         while true; do
           AC_TRY_COMPILE([],
-            [typedef int verify[2*(
-               (($type)(($type)1.0 + ($type)($y)) == ($type)1.0)
-               || ($type)(($type)(($type)1.0 + ($type)($y)) - ($type)1.0) != ($type)($y)
-             ) - 1];],
+            [static_assert((($type)(($type)1.0 + ($type)($y)) == ($type)1.0)
+                         || ($type)(($type)(($type)1.0 + ($type)($y)) - ($type)1.0) != ($type)($y), "");],
             [break;])
           negepsilon_bits=`expr $negepsilon_bits + 1`; y="$y * ($type)0.5"
         done
@@ -68,30 +64,22 @@ AC_DEFUN([CL_FLOATPARAM_CROSS],
         rounds=
         if test -z "$rounds"; then
           AC_TRY_COMPILE([],
-            [typedef int verify[2*(
-               $ys1 == $y1 && $ys2 == $y2 && $zs1 == $z1 && $zs2 == $z2
-             ) - 1];],
+            [static_assert($ys1 == $y1 && $ys2 == $y2 && $zs1 == $z1 && $zs2 == $z2, "");],
             [rounds=rounds_to_nearest])
         fi
         if test -z "$rounds"; then
           AC_TRY_COMPILE([],
-            [typedef int verify[2*(
-               $ys1 == $y1 && $ys2 == $y1 && $zs1 == $z1 && $zs2 == $z1
-             ) - 1];],
+            [static_assert($ys1 == $y1 && $ys2 == $y1 && $zs1 == $z1 && $zs2 == $z1, "");],
             [rounds=rounds_to_zero])
         fi
         if test -z "$rounds"; then
           AC_TRY_COMPILE([],
-            [typedef int verify[2*(
-               $ys1 == $y2 && $ys2 == $y2 && $zs1 == $z1 && $zs2 == $z1
-             ) - 1];],
+            [static_assert($ys1 == $y2 && $ys2 == $y2 && $zs1 == $z1 && $zs2 == $z1, "");],
             [rounds=rounds_to_infinity])
         fi
         if test -z "$rounds"; then
           AC_TRY_COMPILE([],
-            [typedef int verify[2*(
-               $ys1 == $y1 && $ys2 == $y1 && $zs1 == $z2 && $zs2 == $z2
-             ) - 1];],
+            [static_assert($ys1 == $y1 && $ys2 == $y1 && $zs1 == $z2 && $zs2 == $z2, "");],
             [rounds=rounds_to_minus_infinity])
         fi
         if test -n "$rounds"; then
