@@ -31,22 +31,18 @@ mkdir -p build-aux m4
 # libtool
 # Don't use libtoolize, as it may not be installed or may be outdated.
 for f in build-aux/ltmain.sh m4/libtool.m4 m4/ltoptions.m4 m4/ltsugar.m4 m4/ltversion.m4 m4/lt~obsolete.m4; do
-  if test ! -f $f; then
-    { wget -nv --timeout=5 -O $f.tmp "https://git.savannah.gnu.org/gitweb/?p=gettext.git;a=blob_plain;f=${f};hb=refs/tags/v${GETTEXT_VERSION}" \
-        && mv $f.tmp $f; \
-    } || rm -f $f.tmp
-  fi
+  { wget -nv --timeout=5 -O $f.tmp "https://git.savannah.gnu.org/gitweb/?p=gettext.git;a=blob_plain;f=${f};hb=refs/tags/v${GETTEXT_VERSION}" \
+      && mv $f.tmp $f; \
+  } || rm -f $f.tmp
 done
 
 # config.{guess,sub}, gnulib module 'havelib', test-driver.diff
 for f in build-aux/config.guess build-aux/config.sub \
          m4/lib-ld.m4 m4/lib-link.m4 m4/lib-prefix.m4 m4/host-cpu-c-abi.m4 build-aux/config.rpath \
          build-aux/test-driver.diff; do
-  if test ! -f $f; then
-    { wget -nv --timeout=5 -O $f.tmp "https://git.savannah.gnu.org/gitweb/?p=gnulib.git;a=blob_plain;f=${f}" \
-        && mv $f.tmp $f; \
-    } || rm -f $f.tmp
-  fi
+  { wget -nv --timeout=5 -O $f.tmp "https://git.savannah.gnu.org/gitweb/?p=gnulib.git;a=blob_plain;f=${f}" \
+      && mv $f.tmp $f; \
+  } || rm -f $f.tmp
 done
 
 # texinfo.tex
@@ -57,11 +53,9 @@ done
 # texinfo release.
 for f in texinfo.tex; do
   g="build-aux/$f"
-  if test ! -f $g; then
-    { wget -nv --timeout=5 -O $g.tmp "https://git.savannah.gnu.org/gitweb/?p=texinfo.git;a=blob_plain;f=doc/${f};hb=refs/tags/texinfo-${TEXINFO_VERSION}" \
-        && mv $g.tmp $g; \
-    } || rm -f $g.tmp
-  fi
+  { wget -nv --timeout=5 -O $g.tmp "https://git.savannah.gnu.org/gitweb/?p=texinfo.git;a=blob_plain;f=doc/${f};hb=refs/tags/texinfo-${TEXINFO_VERSION}" \
+      && mv $g.tmp $g; \
+  } || rm -f $g.tmp
 done
 
 aclocal -I m4
