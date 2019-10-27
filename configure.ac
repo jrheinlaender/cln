@@ -90,7 +90,7 @@ AC_SUBST(CL_VERSION)
 dnl           checks for compiler characteristics
 dnl
 AC_LANG([C++])
-AX_CXX_COMPILE_STDCXX([11])
+AX_CXX_COMPILE_STDCXX([11], [ext], [optional])
 dnl
 CL_LONGLONG
                       dnl DEFS HAVE_LONGLONG
