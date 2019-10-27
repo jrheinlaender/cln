@@ -16,11 +16,6 @@
 /* Define as the type of `tzp' in gettimeofday() declaration. */
 #undef GETTIMEOFDAY_TZP_T
 
-/* CL_TIMES_CLOCK */
-/* Define if you have the times() function and it returns the real time,
-   but don't have the gettimeofday() function. */
-#undef HAVE_TIMES_CLOCK
-
 
 #endif /* _CL_BASE_CONFIG_H */
 

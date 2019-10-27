@@ -113,8 +113,6 @@ CL_GETTIMEOFDAY
                       dnl DEFS HAVE_GETTIMEOFDAY, GETTIMEOFDAY_DOTS, GETTIMEOFDAY_TZP_T
 ac_cv_func_ftime=no
                       dnl don't use ftime(3) even if it's available
-CL_TIMES_CLOCK
-                      dnl DEFS HAVE_TIMES_CLOCK
 CL_RUSAGE
                       dnl DEFS HAVE_SYS_RESOURCE_H, HAVE_GETRUSAGE, HAVE_SYS_TIMES_H
 CL_PERROR

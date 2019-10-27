@@ -41,24 +41,6 @@ inline uint32 get_seed (void)
 }
 }  // namespace cln
 
-#elif defined(HAVE_TIMES_CLOCK)
-
-#include <ctime>
-#ifndef CLK_TCK
-#include <sys/time.h>
-#endif
-#include <sys/times.h>
-extern "C" clock_t times (struct tms * buffer);
-
-namespace cln {
-inline uint32 get_seed (void)
-{
-	var struct tms tmsbuf;
-	var uint32 seed_lo = times(&tmsbuf);
-	return seed_lo + tmsbuf.tms_utime + tmsbuf.tms_stime;
-}
-}  // namespace cln
-
 #endif
 
 #elif defined(_WIN32) && !defined(__CYGWIN__)
