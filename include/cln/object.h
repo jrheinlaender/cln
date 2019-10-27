@@ -538,7 +538,7 @@ inline cl_private_thing as_cl_private_thing (const cl_rcpointer& x)
   #define CL_DEFINE_CONVERTER(target_class)  \
     operator const target_class & () const				\
     {									\
-      typedef int assert1 [2*(sizeof(target_class)==sizeof(*this))-1];	\
+      int (*dummy1)(int assert1 [2*(sizeof(target_class)==sizeof(*this))-1]); (void)dummy1; \
       return * (const target_class *) (void*) this;			\
     }
 

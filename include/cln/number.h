@@ -257,7 +257,7 @@ template<class type>
 inline const type& the(const cl_number& x)
 {
 	// check that sizeof(type)==sizeof(cl_number)
-	typedef int assertion1 [1 - 2 * (sizeof(type) != sizeof(cl_number))];
+	int (*dummy1)(int assertion1 [1 - 2 * (sizeof(type) != sizeof(cl_number))]); (void)dummy1;
 	return *(const type *) &x;
 }
 // Conversions to subtypes without checking, macro version:
