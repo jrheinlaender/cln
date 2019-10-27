@@ -129,7 +129,7 @@ inline cl_string::cl_string ()
 }
 
 // Hash code.
-extern unsigned long hashcode (const cl_string& str);
+extern uintptr_t hashcode (const cl_string& str);
 
 // Output.
 extern void fprint (std::ostream& stream, const cl_string& str);
