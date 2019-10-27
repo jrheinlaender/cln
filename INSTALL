@@ -4,17 +4,16 @@ Prerequisites.
 C++11-compliant C++ compiler. GNU C++ compiler (version >= 4.8.1) is recommend.
 Non-GNU compilers might not work at the moment.
 
-GNU multiprecision library (http://gmplib.org), version > 4.0 (older 3.x
-versions might work too).
+GNU multiprecision library (http://gmplib.org), version > 4.0.
 
 [Optional] To build CLN documentation texinfo and TeX are necessary.
 
 If you install CLN from git, you also need 
 
 git itself (http://git-scm.com), version >= 1.5.0
-GNU autoconf (http://www.gnu.org/software/autoconf), version >= 2.59
+GNU autoconf (http://www.gnu.org/software/autoconf), version >= 2.63
 GNU libtool  (http://www.gnu.org/software/libtool), version >= 1.5
-GNU automake (http://www.gnu.org/software/automake), version >= 1.8
+GNU automake (http://www.gnu.org/software/automake), version >= 1.11
 
 Installation from a source .tar.bz2 distribution.
 ================================================
