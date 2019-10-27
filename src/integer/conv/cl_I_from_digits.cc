@@ -49,7 +49,7 @@ static const cl_I digits_to_I_base2 (const char * MSBptr, uintC len, uintD base)
 			    // d is ready to be written into the NUDS:
 			    lsprefnext(erg_MSDptr) = d;
 			    ch_where = ch_where-intDsize;
-			    d = (uintD)ch >> b-ch_where;  // carry
+			    d = (uintD)ch >> (b-ch_where);  // carry
 			    erg_len++;
 			}
 		}
