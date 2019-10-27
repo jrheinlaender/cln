@@ -11,7 +11,7 @@
 
 #include "cln/number.h"
 
-#if (cl_value_len <= 32)
+#if (cl_value_len <= 32) || (long_bitsize==32)
 
 #include "base/digitseq/cl_DS.h"
 
@@ -19,6 +19,7 @@ namespace cln {
 
 cl_private_thing cl_I_constructor_from_UL (uint32 wert)
 {
+#if (cl_value_len <= 32)
 	if ((wert & minus_bit(cl_value_len-1)) == 0)
 	   // Bits, die nicht in den Fixnum-Wert >= 0 reinpassen.
 		return (cl_private_thing)(cl_combine(cl_FN_tag,wert));
@@ -89,6 +90,10 @@ cl_private_thing cl_I_constructor_from_UL (uint32 wert)
 	#endif
 	#undef IF_LENGTH
 	#undef UL_maxlength
+#else // cl_value_len > 32
+	// All bits fit in a fixnum value >= 0.
+	return (cl_private_thing)(cl_combine(cl_FN_tag,wert));
+#endif
 }
 
 }  // namespace cln
