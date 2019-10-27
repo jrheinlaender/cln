@@ -45,6 +45,13 @@ for f in build-aux/config.guess build-aux/config.sub \
   } || rm -f $f.tmp
 done
 
+# autoconf archive
+for f in m4/ax_cxx_compile_stdcxx.m4; do
+  { wget -nv --timeout=5 -O $f.tmp "https://git.savannah.gnu.org/gitweb/?p=autoconf-archive.git;a=blob_plain;f=${f}" \
+      && mv $f.tmp $f; \
+  } || rm -f $f.tmp
+done
+
 # texinfo.tex
 # The most recent snapshot of it is available in the gnulib repository.
 # But this is a snapshot, with all possible dangers.
