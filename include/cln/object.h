@@ -94,8 +94,8 @@ inline bool cl_immediate_p (cl_uint word)
 #define cl_tag_shift	0
 #define cl_value_shift  (cl_tag_len+cl_tag_shift)
 #define cl_value_len	(cl_pointer_size - cl_value_shift)
-#define cl_tag_mask	(((1UL << cl_tag_len) - 1) << cl_tag_shift)
-#define cl_value_mask	(((1UL << cl_value_len) - 1) << cl_value_shift)
+#define cl_tag_mask	((((cl_uint)1 << cl_tag_len) - 1) << cl_tag_shift)
+#define cl_value_mask	((((cl_uint)1 << cl_value_len) - 1) << cl_value_shift)
 
 // Return the tag of a word.
 inline cl_uint cl_tag (cl_uint word)
