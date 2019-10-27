@@ -1,7 +1,7 @@
 Prerequisites.
 =============
 
-ANSI-compliant C++ compiler. GNU C++ compiler (version >= 3.4) is recommend.
+C++11-compliant C++ compiler. GNU C++ compiler (version >= 4.8.1) is recommend.
 Non-GNU compilers might not work at the moment.
 
 GNU multiprecision library (http://gmplib.org), version > 4.0 (older 3.x
@@ -85,29 +85,11 @@ $ make
 [become root if necessary]
 # make install
 
-CLN is known to work with:
-=========================
+On some platforms (arm, hppa, sparc), problems with the assembler routines
+have been reported. It may be best to add "-DNO_ASM" to CPPFLAGS before
+configuring:
 
-  - Linux/x86_64: gcc-3.[3,4], gcc-4.x.x, gcc-[5-7], clang-2.[8,9]
-  - Linux/x86: gcc-3.x.x, gcc-4.x.x, gcc-[5,6]
-  - Linux/ia64: gcc-3.[2-4], gcc-4.[0-4].x
-  - Linux/arm: gcc-3.[0-3], gcc-4.x.x, gcc-[5,6] (*)
-  - Linux/mips: gcc-3.3, gcc-4.[0-9].x, gcc-[5,6]
-  - Linux/sparc: gcc-3.[1-3], gcc-4.[0-9].x
-  - Linux/alpha: gcc-3.[0-3], gcc-4.[0-2].x
-  - Linux/powerpc: gcc-3.[0-3], gcc-4.[0-9].x, gcc-[5,6]
-  - Linux/hppa: gcc-4.2.x (*)
-  - Solaris 2.4 (sparc): gcc-3.[1-3], gcc-4.[0-2].x (*)
-  - OSF/1 V4.0 (alpha): gcc-3.1
-  - Irix 6.5: gcc-3.0
-  - OS X Leopard (x86): gcc 4.0.1
-  - Windows/32-bit: MSVC 16.00.30319.01
-
-(*) On these platforms, problems with the assembler routines have been
-reported. It may be best to add "-DNO_ASM" to CPPFLAGS before
-configuring.
-
-Using gcc-6, the "make" step takes about 15 minutes, on an x86_64 @ 3 GHz.
+$ ./configure CPPFLAGS=-DNO_ASM
 
 More detailed installation instructions can be found in the documentation,
 in the doc/ directory.

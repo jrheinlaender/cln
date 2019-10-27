@@ -395,8 +395,8 @@ This section describes how to install the CLN package on your system.
 @node C++ compiler
 @subsection C++ compiler
 
-To build CLN, you need a C++ compiler.
-GNU @code{g++ 4.0.0} or newer is recommended.
+To build CLN, you need a C++11 compiler.
+GNU @code{g++ 4.8.1} or newer is recommended.
 
 The following C++ features are used:
 classes, member functions, overloading of functions and operators,
@@ -484,12 +484,12 @@ Examples:
 $ CC="gcc" CFLAGS="-O" CXX="g++" CXXFLAGS="-O" ./configure
 @end example
 @example
-$ CC="gcc -V 3.2.3" CFLAGS="-O2 -finline-limit=1000" \
-  CXX="g++ -V 3.2.3" CXXFLAGS="-O2 -finline-limit=1000" \
+$ CC=gcc CFLAGS="-O2 -finline-limit=1000" \
+  CXX=g++ CXXFLAGS="-O2 -finline-limit=1000" \
   CPPFLAGS="-DNO_ASM" ./configure
 @end example
 @example
-$ CC="gcc-4.2" CFLAGS="-O2" CXX="g++-4.2" CXXFLAGS="-O2" ./configure
+$ CC="gcc-9" CFLAGS="-O2" CXX="g++-9" CXXFLAGS="-O2" ./configure
 @end example
 
 Note that for these environment variables to take effect, you have to set
