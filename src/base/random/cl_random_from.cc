@@ -62,15 +62,23 @@ inline uint32 get_seed (void)
 #endif
 
 #elif defined(_WIN32) && !defined(__CYGWIN__)
-#include <sys/time.h>
-#include <sys/timeb.h>
+
+/* <windows.h> included above. */
 
 namespace cln {
 inline uint32 get_seed (void)
 {
-	struct timeb timebuf;
-	ftime(&timebuf);
-	return highlow32(timebuf.time, (long)(timebuf.millitm)*1000);
+	FILETIME current_time;
+
+	GetSystemTimeAsFileTime (&current_time);
+
+	/* Convert from FILETIME to 'struct timeval'.  */
+	/* FILETIME: <https://docs.microsoft.com/en-us/windows/desktop/api/minwinbase/ns-minwinbase-filetime> */
+	ULONGLONG since_1601 =
+		((ULONGLONG) current_time.dwHighDateTime << 32)
+		| (ULONGLONG) current_time.dwLowDateTime;
+	/* Divide by 20 ms, and take the low-order 32 bits. */
+	return (ULONG) (since_1601 / 2000000);
 }
 }  // namespace cln
 
