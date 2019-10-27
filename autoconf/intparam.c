@@ -433,28 +433,28 @@ void main7(void) {
     { printf("#error \"Pointer types %s and %s have different sizes!!\"\n",typestr1,typestr2); }       \
     else                                                                                               \
     { int i;                                                                                           \
-      ulong differences1 = 0, differences2 = 0;                                                        \
+      uintptr_t differences1 = 0, differences2 = 0;                                                    \
       for (i = 0; i<100; i++)                                                                          \
-        { ulong sample;                                                                                \
+        { uintptr_t sample;                                                                            \
           type1 sample1;                                                                               \
           type2 sample2;                                                                               \
-          get_a_random(ulong,ulong_bitsize,sample);                                                    \
+          get_a_random(uintptr_t,pointer_bitsize,sample);                                              \
           sample1 = (type1)sample;                                                                     \
           sample2 = (type2)sample;                                                                     \
-          differences1 |= ((ulong)sample1 ^ (ulong)(type1)(sample2));                                  \
-          differences2 |= ((ulong)sample2 ^ (ulong)(type2)(sample1));                                  \
+          differences1 |= ((uintptr_t)sample1 ^ (uintptr_t)(type1)(sample2));                          \
+          differences2 |= ((uintptr_t)sample2 ^ (uintptr_t)(type2)(sample1));                          \
         }                                                                                              \
       if (differences1==0)                                                                             \
         printf("/* Casts from %s to %s is OK (does nothing). */\n",typestr2,typestr1);                 \
       else                                                                                             \
-      if (differences1 == ~(ulong)0)                                                                   \
+      if (differences1 == ~(uintptr_t)0)                                                               \
         printf("#error \"Casts from %s to %s work in an unknown way!!\"\n",typestr2,typestr1);         \
       else                                                                                             \
         printf("#error \"Casts from %s to %s modify part 0x%8lX of pointer!!\"\n",typestr2,typestr1,differences1); \
       if (differences2==0)                                                                             \
         printf("/* Casts from %s to %s is OK (does nothing). */\n",typestr1,typestr2);                 \
       else                                                                                             \
-      if (differences2 == ~(ulong)0)                                                                   \
+      if (differences2 == ~(uintptr_t)0)                                                               \
         printf("#error \"Casts from %s to %s work in an unknown way!!\"\n",typestr1,typestr2);         \
       else                                                                                             \
         printf("#error \"Casts from %s to %s modify part 0x%8lX of pointer!!\"\n",typestr1,typestr2,differences2); \
