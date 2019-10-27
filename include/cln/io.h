@@ -37,29 +37,79 @@ inline void fprint (std::ostream& stream, const char * string)
 }
 
 
-extern void fprintdecimal (std::ostream& stream, unsigned long x);
-extern void fprintdecimal (std::ostream& stream, long x);
+extern void fprintdecimal_impl (std::ostream& stream, uintptr_t x);
+extern void fprintdecimal_impl (std::ostream& stream, intptr_t x);
 
 inline void fprintdecimal (std::ostream& stream, unsigned int x)
 {
-	fprintdecimal(stream,(unsigned long)x);
+	fprintdecimal_impl(stream,(uintptr_t)x);
 }
 inline void fprintdecimal (std::ostream& stream, int x)
 {
-	fprintdecimal(stream,(long)x);
+	fprintdecimal_impl(stream,(intptr_t)x);
 }
 
-extern void fprinthexadecimal (std::ostream& stream, unsigned long x);
-extern void fprinthexadecimal (std::ostream& stream, long x);
+inline void fprintdecimal (std::ostream& stream, unsigned long x)
+{
+	fprintdecimal_impl(stream,(uintptr_t)x);
+}
+inline void fprintdecimal (std::ostream& stream, long x)
+{
+	fprintdecimal_impl(stream,(intptr_t)x);
+}
+
+#ifdef HAVE_LONGLONG
+#if long_long_bitsize <= pointer_bitsize
+inline void fprintdecimal (std::ostream& stream, unsigned long long x)
+{
+	fprintdecimal_impl(stream,(uintptr_t)x);
+}
+inline void fprintdecimal (std::ostream& stream, long long x)
+{
+	fprintdecimal_impl(stream,(intptr_t)x);
+}
+#else
+extern void fprintdecimal (std::ostream& stream, unsigned long long x);
+extern void fprintdecimal (std::ostream& stream, long long x);
+#endif
+#endif
+
+extern void fprinthexadecimal_impl (std::ostream& stream, uintptr_t x);
+extern void fprinthexadecimal_impl (std::ostream& stream, intptr_t x);
 
 inline void fprinthexadecimal (std::ostream& stream, unsigned int x)
 {
-	fprinthexadecimal(stream,(unsigned long)x);
+	fprinthexadecimal_impl(stream,(uintptr_t)x);
 }
 inline void fprinthexadecimal (std::ostream& stream, int x)
 {
-	fprinthexadecimal(stream,(long)x);
+	fprinthexadecimal_impl(stream,(intptr_t)x);
 }
+
+inline void fprinthexadecimal (std::ostream& stream, unsigned long x)
+{
+	fprinthexadecimal_impl(stream,(uintptr_t)x);
+}
+inline void fprinthexadecimal (std::ostream& stream, long x)
+{
+	fprinthexadecimal_impl(stream,(intptr_t)x);
+}
+
+#ifdef HAVE_LONGLONG
+#if long_long_bitsize <= pointer_bitsize
+inline void fprinthexadecimal (std::ostream& stream, unsigned long long x)
+{
+	fprinthexadecimal_impl(stream,(uintptr_t)x);
+}
+inline void fprinthexadecimal (std::ostream& stream, long long x)
+{
+	fprinthexadecimal_impl(stream,(intptr_t)x);
+}
+#else
+extern void fprinthexadecimal (std::ostream& stream, unsigned long long x);
+extern void fprinthexadecimal (std::ostream& stream, long long x);
+#endif
+#endif
 
 
 struct cl_print_flags;
