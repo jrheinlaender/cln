@@ -111,25 +111,28 @@ inline cl_uint cl_value (cl_uint word)
 }
 
 // Return a word, combining a value and a tag.
-inline cl_uint cl_combine (cl_uint tag, cl_uint value)
+inline cl_uint cl_combine_impl (cl_uint tag, cl_uint value)
 {
 	return (value << cl_value_shift) + (tag << cl_tag_shift);
 }
-inline cl_uint cl_combine (cl_uint tag, cl_sint value)
+inline cl_uint cl_combine_impl (cl_uint tag, cl_sint value)
 {
 	// This assumes cl_value_shift + cl_value_len == cl_pointer_size.
 	return (value << cl_value_shift) + (tag << cl_tag_shift);
 }
-// Keep the compiler happy.
 inline cl_uint cl_combine (cl_uint tag, unsigned int value)
-{ return cl_combine(tag, (cl_uint)value); }
+{ return cl_combine_impl(tag, (cl_uint)value); }
 inline cl_uint cl_combine (cl_uint tag, int value)
-{ return cl_combine(tag, (cl_sint)value); }
+{ return cl_combine_impl(tag, (cl_sint)value); }
+inline cl_uint cl_combine (cl_uint tag, unsigned long value)
+{ return cl_combine_impl(tag, (cl_uint)value); }
+inline cl_uint cl_combine (cl_uint tag, long value)
+{ return cl_combine_impl(tag, (cl_sint)value); }
 #ifdef HAVE_LONGLONG
 inline cl_uint cl_combine (cl_uint tag, unsigned long long value)
-{ return cl_combine(tag, (cl_uint)value); }
+{ return cl_combine_impl(tag, (cl_uint)value); }
 inline cl_uint cl_combine (cl_uint tag, long long value)
-{ return cl_combine(tag, (cl_uint)value); }
+{ return cl_combine_impl(tag, (cl_uint)value); }
 #endif
 
 // Definition of the tags.
