@@ -1,7 +1,7 @@
 // random_state constructor.
 
 
-#if defined(_WIN32)
+#if defined(_WIN32) && !defined(__CYGWIN__)
 #include <windows.h> // For GetCurrentProcessId(), must be included first, sorry.
 #endif
 
@@ -61,7 +61,7 @@ inline uint32 get_seed (void)
 
 #endif
 
-#elif defined(_WIN32)
+#elif defined(_WIN32) && !defined(__CYGWIN__)
 #include <sys/time.h>
 #include <sys/timeb.h>
 
@@ -93,7 +93,7 @@ random_state::random_state ()
 #elif defined(__OpenBSD__)
 	seed_lo = arc4random();
 	seed_hi = arc4random();
-#elif defined(_WIN32)
+#elif defined(_WIN32) && !defined(__CYGWIN__)
 	seed_lo = get_seed();
 	seed_hi = (rand() << 8) ^ (uintL)(GetCurrentProcessId());
 #elif defined(__atarist)
