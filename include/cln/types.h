@@ -6,8 +6,11 @@
 // CPU and other
 #include "cln/config.h"
 
-// char_bitsize, short_bitsize, long_bitsize, long_long_bitsize
+// char_bitsize, short_bitsize, long_bitsize, long_long_bitsize, pointer_bitsize
 #include "cln/intparam.h"
+
+// intptr_t, uintptr_t
+#include <stdint.h>
 
 // Elementary arithmetic types of given width:
   // 8 bits
@@ -99,10 +102,10 @@
   #endif
 
 // Integer type as large as a pointer.
-// Assumption: sizeof(long) == sizeof(void*)
-  #define intPsize long_bitsize
-  typedef long           sintP;
-  typedef unsigned long  uintP;
+// Assumption: sizeof(intptr_t) == sizeof(void*)
+  #define intPsize pointer_bitsize
+  typedef intptr_t   sintP;
+  typedef uintptr_t  uintP;
 
 // Integer type used for the value of a fixnum.
   #define intVsize long_bitsize
