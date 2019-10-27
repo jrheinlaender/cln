@@ -108,9 +108,11 @@
   typedef uintptr_t  uintP;
 
 // Integer type used for the value of a fixnum.
-  #define intVsize long_bitsize
-  typedef long           sintV;
-  typedef unsigned long  uintV;
+  // It must be like this, because in a couple of places we assume
+  // cl_value_shift + cl_value_len == cl_pointer_size.
+  #define intVsize intPsize
+  typedef sintP  sintV;
+  typedef uintP  uintV;
 
 // Numbers in the heap are stored as "digit" sequences.
 // A digit is an unsigned int with intDsize bits.
