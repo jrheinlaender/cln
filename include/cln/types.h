@@ -51,7 +51,7 @@
     #undef HAVE_LONGLONG
    #endif
   #endif
-  #if defined(HAVE_LONGLONG) && (defined(__alpha__) || defined(__ia64__) || defined(__mips64__) || defined(__powerpc64__) || defined(__s390x__) || (defined(__sparc__) && defined(__arch64__)) || defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && __riscv_xlen == 64)) || defined(__e2k__)
+  #if defined(HAVE_LONGLONG) && (defined(__alpha__) || defined(__ia64__) || defined(__mips64__) || defined(__powerpc64__) || defined(__s390x__) || (defined(__sparc__) && defined(__arch64__)) || (defined(__x86_64__) || defined(_M_AMD64)) || defined(__aarch64__) || (defined(__riscv) && __riscv_xlen == 64)) || defined(__e2k__)
     // 64 bit registers in hardware
     #define HAVE_FAST_LONGLONG
   #endif
