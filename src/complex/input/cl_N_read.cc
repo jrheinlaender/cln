@@ -108,7 +108,7 @@ const cl_N read_complex (const cl_read_flags& flags, const char * string, const 
 		var cl_signean sign = 0;
 		if (ptr == string_limit) goto not_rational_syntax;
 		switch (*ptr) {
-			case '-': sign = ~sign;
+			case '-': sign = ~sign; // fallthrough
 			case '+': ptr++;
 			default: break;
 		}
@@ -158,7 +158,7 @@ not_rational_syntax:
 		var cl_signean sign = 0;
 		if (ptr == string_limit) goto not_float_syntax;
 		switch (*ptr) {
-			case '-': sign = ~sign;
+			case '-': sign = ~sign; // fallthrough
 			case '+': ptr++;
 			default: break;
 		}
@@ -316,7 +316,7 @@ static const cl_N read_complex_number_rest (const cl_read_flags& flags, const ch
 			return complex(0,x);
 		}
 		switch (*ptr) {
-			case '+': ptr++;
+			case '+': ptr++; // fallthrough
 			case '-': break;
 			default: goto not_complex_syntax;
 		}

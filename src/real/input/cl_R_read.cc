@@ -106,7 +106,7 @@ const cl_R read_real (const cl_read_flags& flags, const char * string, const cha
 		var cl_signean sign = 0;
 		if (ptr == string_limit) goto not_rational_syntax;
 		switch (*ptr) {
-			case '-': sign = ~sign;
+			case '-': sign = ~sign; // fallthrough
 			case '+': ptr++;
 			default: break;
 		}
@@ -159,7 +159,7 @@ not_rational_syntax:
 		var cl_signean sign = 0;
 		if (ptr == string_limit) goto not_float_syntax;
 		switch (*ptr) {
-			case '-': sign = ~sign;
+			case '-': sign = ~sign; // fallthrough
 			case '+': ptr++;
 			default: break;
 		}
