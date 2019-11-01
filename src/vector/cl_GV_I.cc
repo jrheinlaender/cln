@@ -69,9 +69,9 @@ static inline cl_GV_I_vectorops* outcast (cl_GV_vectorops<cl_I>* vectorops)
 struct cl_heap_GV_I_general : public cl_heap_GV_I {
 	cl_I data[1];
 	// Standard allocation disabled.
-	void* operator new (size_t size) { unused size; throw runtime_exception(); }
+	void* operator new (size_t size) = delete;
 	// Standard deallocation disabled.
-	void operator delete (void* ptr) { unused ptr; throw runtime_exception(); }
+	void operator delete (void* ptr) = delete;
 	// No default constructor.
 	cl_heap_GV_I_general ();
 };
@@ -139,9 +139,9 @@ cl_heap_GV_I* cl_make_heap_GV_I (std::size_t len)
 struct cl_heap_GV_I_bits##m : public cl_heap_GV_I {			\
 	uint_t data[1];							\
 	/* Standard allocation disabled. */				\
-	void* operator new (size_t size) { unused size; throw runtime_exception(); } \
+	void* operator new (size_t size) = delete;			\
 	/* Standard deallocation disabled. */				\
-	void operator delete (void* ptr) { unused ptr; throw runtime_exception(); } \
+	void operator delete (void* ptr) = delete;			\
 	/* No default constructor. */					\
 	cl_heap_GV_I_bits##m ();					\
 };									\

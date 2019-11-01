@@ -18,9 +18,9 @@ private:
 	unsigned long length;	// length (in characters)
 	char data[1];		// the characters, plus a '\0' at the end
 	// Standard allocation disabled.
-	void* operator new (size_t size) { (void)size; throw runtime_exception(); }
+	void* operator new (size_t size) = delete;
 	// Standard deallocation disabled.
-	void operator delete (void* ptr) { (void)ptr; throw runtime_exception(); }
+	void operator delete (void* ptr) = delete;
 	// No default constructor.
 	cl_heap_string ();
 private:

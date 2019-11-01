@@ -45,9 +45,9 @@ static inline const cl_heap_GV_number * outcast (const cl_GV_inner<cl_number>* v
 struct cl_heap_GV_number_general : public cl_heap_GV_number {
 	cl_number data[1];
 	// Standard allocation disabled.
-	void* operator new (size_t size) { unused size; throw runtime_exception(); }
+	void* operator new (size_t size) = delete;
 	// Standard deallocation disabled.
-	void operator delete (void* ptr) { unused ptr; throw runtime_exception(); }
+	void operator delete (void* ptr) = delete;
 	// No default constructor.
 	cl_heap_GV_number_general ();
 };
