@@ -45,10 +45,10 @@ cl_private_thing cl_I_constructor_from_L (sint32 wert)
 	}
 	if (wert >= 0) {
 		#define IF_LENGTH(i)  \
-		  if ((bn_minlength <= i) && (i*intDsize <= 32))	\
-		    if (!((i+1)*intDsize <= 32)				\
+		  if ((bn_minlength <= i) && (i*intDsize <= 32)		\
+		    && (!((i+1)*intDsize <= 32)				\
 		        || ((uint32)wert < (uint32)bitc(i*intDsize-1))	\
-		       )
+		     ) )
 		#if (intDsize <= 32)
 		IF_LENGTH(1)
 			bignum1:
@@ -88,10 +88,10 @@ cl_private_thing cl_I_constructor_from_L (sint32 wert)
 		#undef IF_LENGTH
 	} else {
 		#define IF_LENGTH(i)  \
-		  if ((bn_minlength <= i) && (i*intDsize <= 32))	\
-		    if (!((i+1)*intDsize <= 32)				\
+		  if ((bn_minlength <= i) && (i*intDsize <= 32)		\
+		    && (!((i+1)*intDsize <= 32)				\
 		        || ((uint32)wert >= (uint32)(-bitc(i*intDsize-1))) \
-		       )
+		     ) )
 		#if (intDsize <= 32)
 		IF_LENGTH(1)
 			goto bignum1;
