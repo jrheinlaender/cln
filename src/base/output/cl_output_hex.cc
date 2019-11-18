@@ -30,10 +30,10 @@ static void fprinthexadecimal_impl (std::ostream& stream, uintptr_t x)
 static void fprinthexadecimal_impl (std::ostream& stream, intptr_t x)
 {
 	if (x >= 0)
-		fprintdecimal(stream,(uintptr_t)x);
+		fprinthexadecimal(stream,(uintptr_t)x);
 	else {
 		fprintchar(stream,'-');
-		fprintdecimal(stream,(uintptr_t)(-1-x)+1);
+		fprinthexadecimal(stream,(uintptr_t)(-1-x)+1);
 	}
 }
 
@@ -83,10 +83,10 @@ void fprinthexadecimal (std::ostream& stream, long long x)
 	fprinthexadecimal_impl(stream,(intptr_t)x);
 #else
 	if (x >= 0)
-		fprintdecimal(stream,(unsigned long long)x);
+		fprinthexadecimal(stream,(unsigned long long)x);
 	else {
 		fprintchar(stream,'-');
-		fprintdecimal(stream,(unsigned long long)(-1-x)+1);
+		fprinthexadecimal(stream,(unsigned long long)(-1-x)+1);
 	}
 #endif
 }
