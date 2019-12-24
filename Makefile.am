@@ -111,7 +111,8 @@ EXTRA_DIST += include/cln/config.h.in \
 	     include/cln/version.h.in \
 autoconf/floatparam.c \
 autoconf/intparam.c \
-INSTALL.generic
+INSTALL.generic \
+INSTALL.windows
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-static
 

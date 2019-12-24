@@ -258,7 +258,7 @@ AC_DEFUN([CL_INTPARAM_BITSIZE],
 [
   n=1; x="($1)2"
   while true; do
-    AC_TRY_COMPILE([], [static_assert(($1)($x) == 0, "");],
+    AC_TRY_COMPILE([], [typedef int verify[2*(($1)($x) == 0) - 1];],
       [$2=$n; break;],
       [if test $n = 1000; then $2=; break; fi;])
     n=`expr $n + 1`; x="$x * ($1)2"
