@@ -45,8 +45,6 @@ extern int test_I_sqrtp (int iterations);
 // Miscellaneous.
 extern int test_I_io (int iterations);
 extern int test_I_GV (int iterations);
-extern int test_I_factorial(int iterations);
-extern int test_I_doublefactorial(int iterations);
 
 #define RUN(tester,iterations)  \
 	std::cout << "Testing "#tester"..." << std::endl; \
@@ -101,7 +99,5 @@ int test_I (int iterations)
 	// Miscellaneous.
 	RUN(test_I_io,iterations);
 	RUN(test_I_GV,iterations);
-	RUN(test_I_factorial, iterations);
-	RUN(test_I_doublefactorial, iterations);
 	return error;
 }
