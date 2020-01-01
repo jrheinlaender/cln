@@ -78,6 +78,7 @@ tests_SOURCES = test.h tests.cc test_I.cc test_I.h test_I_abs.cc test_I_compare.
 	test_I_logcount.cc test_I_ilength.cc test_I_ord2.cc \
 	test_I_power2p.cc test_I_isqrt.cc test_I_sqrtp.cc \
 	test_I_io.cc test_I_GV.cc \
+	test_I_factorial.cc \
 	test_MI.h test_MI.cc test_MI_canonhom.cc test_MI_plus.cc \
 	test_MI_minus.cc test_MI_mul.cc test_MI_recip.cc \
 	test_MI_div.cc test_MI_expt.cc \
